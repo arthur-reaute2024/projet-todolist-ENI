@@ -1,0 +1,36 @@
+services:
+  frontend:
+    image: projet-todolist-eni-frontend:latest
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: projet-todolist-eni-backend:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/scriptSQL.sql:/docker-entrypoint-initdb.d/scriptSQL.sql
+    healthcheck:
+      test: ["CMD", "sh", "-c", "mysql -u root -p$MYSQL_ROOT_PASSWORD -e 'USE todolist_db; SHOW TABLES LIKE \"tasks\";'"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db_data:
