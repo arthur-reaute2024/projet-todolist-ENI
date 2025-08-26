@@ -73,9 +73,8 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build and push the Docker image - Frontend
         uses: docker/build-push-action@v6
@@ -83,9 +82,9 @@ jobs:
           context: "{{defaultContext}}:frontend"
           push: true
           tags: |
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:latest
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:${{ github.sha }}
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:${{ github.ref_name }}
+            starbonker/projet-todolist-eni-frontend:latest
+            starbonker/projet-todolist-eni-frontend:${{ github.sha }}
+            starbonker/projet-todolist-eni-frontend:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -95,9 +94,9 @@ jobs:
           context: "{{defaultContext}}:backend"
           push: true
           tags: |
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:latest
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:${{ github.sha }}
-            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:${{ github.ref_name }}
+            starbonker/projet-todolist-eni-backend:latest
+            starbonker/projet-todolist-eni-backend:${{ github.sha }}
+            starbonker/projet-todolist-eni-backend:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
