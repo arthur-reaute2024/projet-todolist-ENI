@@ -23,4 +23,7 @@ jobs:
           action : deploy
           strategy: basic
           manifests: |
-            k8s
+            k8s/mysql
+            k8s/backend
+            k8s/frontend
+            k8s/ingress
