@@ -109,7 +109,7 @@ jobs:
         uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-          k8s-url: ${{ secrets.KUBE_CONFIG }}
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
       - name: Checkout source code
         uses: actions/checkout@v4
