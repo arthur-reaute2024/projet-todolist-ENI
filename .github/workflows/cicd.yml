@@ -56,8 +56,8 @@ jobs:
         continue-on-error: true # The test is broken with the code given. It's up to the developpers to fix it
         run: npm run test
 
-  build:
-    name: Build
+  build-push:
+    name: Build and Push
     needs:
       - test-front
       - test-back
