@@ -10,6 +10,7 @@ COPY . .
 
 # App
 FROM node:18
+LABEL org.opencontainers.image.source="https://github.com/arthur-reaute2024/projet-todolist-ENI"
 WORKDIR /app
 
 COPY --from=build /app .
