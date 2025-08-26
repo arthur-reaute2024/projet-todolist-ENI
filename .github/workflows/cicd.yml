@@ -83,9 +83,9 @@ jobs:
           context: "{{defaultContext}}:frontend"
           push: true
           tags: |
-            ghcr.io/${{ username }}/projet-todolist-eni-frontend:latest
-            ghcr.io/${{ username }}/projet-todolist-eni-frontend:${{ github.sha }}
-            ghcr.io/${{ username }}/projet-todolist-eni-frontend:${{ github.ref_name }}
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:latest
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:${{ github.sha }}
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-frontend:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -95,9 +95,9 @@ jobs:
           context: "{{defaultContext}}:backend"
           push: true
           tags: |
-            ghcr.io/${{ username }}/projet-todolist-eni-backend:latest
-            ghcr.io/${{ username }}/projet-todolist-eni-backend:${{ github.sha }}
-            ghcr.io/${{ username }}/projet-todolist-eni-backend:${{ github.ref_name }}
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:latest
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:${{ github.sha }}
+            ghcr.io/arthur-reaute2024/projet-todolist-eni-backend:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
