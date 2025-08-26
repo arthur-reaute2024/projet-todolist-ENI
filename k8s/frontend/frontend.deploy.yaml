@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+  namespace: prod
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: frontend
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: starbonker/projet-todolist-eni-frontend
+        imagePullPolicy: Always
+        name: projet-todolist-eni-frontend
+        ports:
+          - containerPort: 80

@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: prod
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: backend
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: starbonker/projet-todolist-eni-backend
+        imagePullPolicy: Always
+        name: projet-todolist-eni-backend
+        ports:
+          - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql.prod.svc.cluster.local
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          value: your_password
+        - name: DB_NAME
+          value: todolist_db
+        - name: DB_DIALECT
+          value: mysql
+        - name: PORT
+          value: "3000"

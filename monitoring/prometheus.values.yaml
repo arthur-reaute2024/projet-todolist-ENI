@@ -1,0 +1,39 @@
+server:
+  retention: 90d
+  persistentVolume: 
+    storageClass: azurefile-csi
+    size: 8Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 750Mi
+    limits:
+      cpu: 200m
+      memory: 1.5Gi
+  strategy:
+    type: Recreate
+  service:
+    servicePort: 9090
+  
+  replicaCount: 1
+  statefulSet:
+    enabled: true
+
+prometheus-node-exporter:
+  enabled: true
+
+kube-state-metrics:
+  enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 128Mi
+    limits:
+      cpu: 20m
+      memory: 256Mi
+
+prometheus-pushgateway:
+  enabled: false
+
+alertmanager:
+  enabled: false
