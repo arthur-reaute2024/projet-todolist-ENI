@@ -70,7 +70,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to GitHub Container Registry
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
@@ -100,27 +100,24 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # deploy:
-  #   name: Deploy
-  #   if: github.ref == 'refs/heads/master'
-  #   needs: [ test, build ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Set the Kubernetes context
-  #       uses: azure/k8s-set-context@v4
-  #       with:
-  #         method: service-account
-  #         k8s-url: <server-url>
-  #         k8s-secret: ${{ secrets.KUBERNETES_SECRET }}
+  deploy:
+    name: Deploy
+    needs: [ test-front, test-back, build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set the Kubernetes context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          k8s-url: ${{ secrets.KUBE_CONFIG }}
 
-  #     - name: Checkout source code
-  #       uses: actions/checkout@v4
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-  #     - name: Deploy to the Kubernetes cluster
-  #       uses: azure/k8s-deploy@v5
-  #       with:
-  #         namespace: default
-  #         manifests: |
-  #           kubernetes/deployment.yaml
-  #         images: |
-  #           ghcr.io/username/package:${{ github.sha }}
+      - name: Deploy to the Kubernetes cluster
+        uses: azure/k8s-deploy@v5
+        with:
+          action : deploy
+          strategy: basic
+          manifests: |
+            k8s
