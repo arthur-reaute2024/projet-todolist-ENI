@@ -102,7 +102,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [ test-front, test-back, build ]
+    needs: [ test-front, test-back, build-push ]
     runs-on: ubuntu-latest
     steps:
       - name: Set the Kubernetes context
