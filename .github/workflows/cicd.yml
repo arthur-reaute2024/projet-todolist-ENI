@@ -46,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: backend
-        run: npm install
+        run: npm install --unsafe-perm
 
       - name: Test
         working-directory: backend
