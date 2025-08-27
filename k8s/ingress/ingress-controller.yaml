@@ -320,7 +320,8 @@ subjects:
   namespace: ingress-nginx
 ---
 apiVersion: v1
-data: null
+data:
+  strict-validate-path-type: "false"
 kind: ConfigMap
 metadata:
   labels:
