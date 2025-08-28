@@ -1,7 +1,7 @@
 data "azurerm_resource_group" "rg_areaute_k8s" {
   name = "rg-AReaute2024_cours-projet"
 }
-resource "azurerm_kubernetes_cluster" "k8s" { 
+resource "azurerm_kubernetes_cluster" "k8s" {
   location            = data.azurerm_resource_group.rg_areaute_k8s.location
   resource_group_name = data.azurerm_resource_group.rg_areaute_k8s.name
   name                = "cluster-ar"
@@ -22,6 +22,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     cours     = "cours-projet",
     promotion = "HASDO_001",
     user      = "AReaute2024"
+  }
+
+  lifecycle {
+    ignore_changes = [default_node_pool]
   }
 }
 
