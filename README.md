@@ -1,6 +1,6 @@
 # Déploiement d’une application ToDoList conteneurisée sur AKS
 
-@author
+@arthur_reaute2024 : <arthur.reaute2024@campus-eni.fr>
 
 ## Présentation du projet
 
