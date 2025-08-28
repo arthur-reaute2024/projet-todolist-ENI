@@ -30,7 +30,7 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: starbonker/projet-todolist-eni-frontend:0.1.0
+      - image: starbonker/projet-todolist-eni-frontend:0.1.1
         imagePullPolicy: Always
         name: projet-todolist-eni-frontend
         ports:
